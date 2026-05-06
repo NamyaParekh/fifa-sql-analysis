@@ -1,3 +1,20 @@
+SELECT 
+    p.name,
+    p.club,
+    p.country,
+    pos.position_name,
+    p.overall_rating,
+    CASE 
+        WHEN p.overall_rating >= 90 THEN 'Elite'
+        WHEN p.overall_rating >= 85 THEN 'Top Tier'
+        ELSE 'Good'
+    END AS player_level
+FROM PlayerStats p
+JOIN PlayerPositions pp ON p.player_id = pp.player_id
+JOIN Positions pos ON pp.position_id = pos.position_id
+ORDER BY p.overall_rating DESC;
+
+--OUTPUT--
 name,club,country,position_name,overall_rating,player_level
 Kylian Mbappe,PSG,France,ST,91,Elite
 Erling Haaland,Man City,Norway,ST,91,Elite
